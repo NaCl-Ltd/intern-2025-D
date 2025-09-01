@@ -13,6 +13,10 @@ class MicropostsController < ApplicationController
       render 'static_pages/home', status: :unprocessable_entity
     end
   end
+  
+  def latest
+    @microposts = Micropost.latest(current_user)
+  end
 
   def destroy
     @micropost.destroy
