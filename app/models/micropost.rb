@@ -10,7 +10,7 @@ class Micropost < ApplicationRecord
   scope :following, ->(user) { where(user_id: user.following.select(:id)) }
 
   #last 48h, at most 10
-  scope :latest, -> (user){ following(user).order(created_at: :desc).limit(10) }
+    scope :latest, -> (user){ following(user).order(created_at: :desc).limit(10) }
   validates :user_id, presence: true
   validates :content, presence: true, length: { maximum: 140 }
   validates :image,   content_type: { in: %w[image/jpeg image/gif image/png],
