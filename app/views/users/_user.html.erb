@@ -10,6 +10,8 @@
       <strong id='followers' class='stat' style='color: #7B7B7B;'>followers: <%= user.followers.count %></strong>
     </span>
   </div>
+  <br>
+  <%= user.introduction %>
   <% if current_user.admin? && !current_user?(user) %>
      <%= link_to "delete", user, data: { "turbo-method": :delete,
                                           turbo_confirm: "You sure?" } %>
