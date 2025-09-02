@@ -6,6 +6,12 @@
         <%= gravatar_for @user %>
         <%= @user.name %>
       </h1>
+      <% if @user.introduction.present? %>
+        <p>
+          <strong>个人简介:</strong><br>
+          <%= @user.introduction %>
+        </p>
+      <% end %>
     </section>
     <section class="stats">
       <%= render 'shared/stats' %>
