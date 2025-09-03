@@ -19,6 +19,8 @@ class User < ApplicationRecord
   has_secure_password
   validates :password, presence: true, length: { minimum: 6 }, allow_nil: true
 
+  has_one :pinned_micropost, class_name: 'Micropost', foreign_key: 'pinned_by_id'
+
   # 渡された文字列のハッシュ値を返す
   def User.digest(string)
     cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST :
@@ -90,6 +92,7 @@ class User < ApplicationRecord
                      WHERE  follower_id = :user_id"
     Micropost.where("user_id IN (#{following_ids})
                      OR user_id = :user_id", user_id: id)
+             .where.not(pinned_by_id: id).or(Micropost.where(pinned_by_id: nil))
              .includes(:user, image_attachment: :blob)
   end
 

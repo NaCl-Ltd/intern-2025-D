@@ -22,6 +22,9 @@
     <% if @user.microposts.any? %>
       <h3>Microposts (<%= @user.microposts.count %>)</h3>
       <ol class="microposts">
+        <% if @pinned_micropost %>
+          <%= render partial: "microposts/micropost", locals: {micropost: @pinned_micropost}%>
+        <% end %>
         <%= render @microposts %>
       </ol>
       <%= will_paginate @microposts %>

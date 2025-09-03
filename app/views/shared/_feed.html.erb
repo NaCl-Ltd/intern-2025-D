@@ -1,5 +1,8 @@
 <% if @feed_items.any? %>
   <ol class="microposts">
+  <% if @pinned_micropost %>
+    <%= render partial: "microposts/micropost", locals: {micropost: @pinned_micropost}%>
+  <% end %>
     <%= render @feed_items %>
   </ol>
   <%= will_paginate @feed_items,

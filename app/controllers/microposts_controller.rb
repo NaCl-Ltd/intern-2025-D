@@ -32,6 +32,25 @@ class MicropostsController < ApplicationController
     end
   end
 
+  def fix
+    micropost = current_user.microposts.find_by(id: params[:id])
+    return redirect_to root_url, alert: "Micropost not found" unless micropost
+    #他の固定を解除
+    current_user.microposts.where.not(id: micropost.id).where(pinned_by_id: current_user.id).update_all(pinned_by_id: nil)
+    #新たに固定
+    micropost.update(pinned_by_id: current_user.id)
+    redirect_to request.referrer || root_url, notice: "固定しました"
+  end
+
+  def unfix
+    micropost = current_user.microposts.find_by(id: params[:id])
+    return redirect_to root_url, alert: "Micropost not found" unless micropost
+
+    micropost.update(pinned_by_id: nil)
+
+    redirect_to request.referrer || root_url, notice: "固定を解除しました"
+end
+
   private
 
     def micropost_params
