@@ -1,7 +1,15 @@
+<style>
+  .pinned {
+    background-color: #fff8dc;
+    border-left: 4px solid #f0c000;
+  }
+</style>
 <% if @feed_items.any? %>
   <ol class="microposts">
   <% if @pinned_micropost %>
+    <div class="pinned">
     <%= render partial: "microposts/micropost", locals: {micropost: @pinned_micropost}%>
+    </div>
   <% end %>
     <%= render @feed_items %>
   </ol>
