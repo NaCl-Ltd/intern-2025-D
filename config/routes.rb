@@ -20,7 +20,12 @@ Rails.application.routes.draw do
     collection do
       get :latest
     end
+    member do
+      post :fix
+      post :unfix
+    end
   end
+  
   resources :relationships,       only: [:create, :destroy]
   get '/microposts', to: 'static_pages#home'
 end

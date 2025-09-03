@@ -1,3 +1,9 @@
+<style>
+  .pinned {
+    background-color: #fff8dc;
+    border-left: 4px solid #f0c000;
+  }
+</style>
 <% provide(:title, @user.name) %>
 <div class="row">
   <aside class="col-md-4">
@@ -22,6 +28,11 @@
     <% if @user.microposts.any? %>
       <h3>Microposts (<%= @user.microposts.count %>)</h3>
       <ol class="microposts">
+        <% if @pinned_micropost %>
+          <div class="pinned">
+          <%= render partial: "microposts/micropost", locals: {micropost: @pinned_micropost}%>
+          </div>
+        <% end %>
         <%= render @microposts %>
       </ol>
       <%= will_paginate @microposts %>

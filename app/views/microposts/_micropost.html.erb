@@ -11,7 +11,15 @@
     Posted <%= time_ago_in_words(micropost.created_at) %> ago.
     <% if current_user?(micropost.user) %>
       <%= link_to "delete", micropost, data: { "turbo-method": :delete,
-                                               turbo_confirm: "You sure?" } %>
+                                                turbo_confirm: "You sure?" } %>
+      <% if micropost.pinned_by_id.present? %>
+        <%= link_to "固定解除", unfix_micropost_path(micropost), data: { "turbo-method": :post,
+                                                                         turbo_confirm: "固定を解除しますか？" } %>
+      <% else %>
+        <%= link_to "固定する", fix_micropost_path(micropost), data: { "turbo-method": :post,
+                                                                       turbo_confirm: "この投稿を固定しますか？" } %> 
+      <% end %>                                     
     <% end %>
+
   </span>
 </li>

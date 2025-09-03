@@ -57,4 +57,9 @@ module SessionsHelper
   def store_location
     session[:forwarding_url] = request.original_url if request.get?
   end
+  #固定しようとしているユーザと紐づけられているマイクロポストを取得する
+  def get_micropost
+    @pinned_micropost = Micropost.find_by(pinned_by_id: current_user.id)
+  end
+
 end
