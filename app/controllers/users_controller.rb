@@ -63,8 +63,6 @@ class UsersController < ApplicationController
   private
 
     def user_params
-      Rails.logger.debug "[DEBUG] --------------------------"
-      Rails.logger.debug "[DEBUG] params: #{params}"
       params.require(:user).permit(:name, :email, :password,
                                    :password_confirmation,
                                    :introduction)
