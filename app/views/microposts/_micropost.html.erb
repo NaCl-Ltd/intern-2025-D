@@ -22,4 +22,21 @@
     <% end %>
 
   </span>
+  <div class="interaction">
+    <span class="comment">
+      <%= image_tag "chat.png", width:"20" %>
+      <span style='margin-left: 5px;'>chat</span> </span>
+
+    <span class="repost" data-controller="repost">
+      <%= image_tag "retweet.png", width:"20", data: { controller:"toggle", action: "click->repost#toggle" } %>
+      <span style='margin-left: 5px;'>repost</span> </span>
+
+    <span class="like" data-controller="like">
+      <%= image_tag "heart.png", width:"20", data: { controller:"toggle", action: "click->like#toggle" } %> 
+      <span style='margin-left: 5px;'>like</span> </span>
+      
+    <span class="favorite" data-controller="favorite">
+      <%= image_tag "star.png", width:"20", data: { controller:"toggle", action: "click->favorite#toggle" } %>
+      <span style='margin-left: 5px;'>favorite</span> </span>
+  </div>
 </li>
