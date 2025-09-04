@@ -1,6 +1,7 @@
 class Micropost < ApplicationRecord
   belongs_to :user
   has_many :likes
+  has_many :favorites
   has_one_attached :image do |attachable|
     attachable.variant :display, resize_to_limit: [500, 500]
   end
@@ -21,5 +22,8 @@ class Micropost < ApplicationRecord
   # ユーザーが該当ツイートをいいね済かどうかを判定するメソッド
   def liked_by?(user)
     likes.where(user_id: user.id).exists?
+  end
+  def favorite_by?(user)
+    favorites.where(user_id: user.id).exists?
   end
 end

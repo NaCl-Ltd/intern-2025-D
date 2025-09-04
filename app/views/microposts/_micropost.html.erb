@@ -35,8 +35,8 @@
       <%= render partial: "likes/like", locals: { micropost: micropost } %>
     </div>
       
-    <span class="favorite" data-controller="favorite">
-      <%= image_tag "star.png", width:"20", data: { controller:"toggle", action: "click->favorite#toggle" } %>
-      <span style='margin-left: 5px;'>favorite</span> </span>
+    <div id="favorite-btn<%= micropost.id %>">
+      <%= render partial: "favorites/favorite", locals: { micropost: micropost } %>
+    </div>
   </div>
 </li>

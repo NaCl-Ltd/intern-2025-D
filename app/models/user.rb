@@ -10,6 +10,7 @@ class User < ApplicationRecord
   has_many :followers, through: :passive_relationships, source: :follower
   attr_accessor :remember_token, :activation_token, :reset_token
   has_many :likes
+  has_many :favorites
   before_save   :downcase_email
   before_create :create_activation_digest
   validates :name, presence: true, length: { maximum: 50 }
