@@ -13,11 +13,11 @@
       <%= link_to "delete", micropost, data: { "turbo-method": :delete,
                                                 turbo_confirm: "You sure?" } %>
       <% if micropost.pinned_by_id.present? %>
-        <%= link_to "固定解除", unfix_micropost_path(micropost), data: { "turbo-method": :post,
-                                                                         turbo_confirm: "固定を解除しますか？" } %>
+        <%= link_to "unfix", unfix_micropost_path(micropost), data: { "turbo-method": :post,
+                                                                         turbo_confirm: "You sure?" } %>
       <% else %>
-        <%= link_to "固定する", fix_micropost_path(micropost), data: { "turbo-method": :post,
-                                                                       turbo_confirm: "この投稿を固定しますか？" } %> 
+        <%= link_to "fix", fix_micropost_path(micropost), data: { "turbo-method": :post,
+                                                                       turbo_confirm: "You sure?" } %> 
       <% end %>                                     
     <% end %>
 
@@ -31,9 +31,12 @@
       <%= image_tag "retweet.png", width:"20", data: { controller:"toggle", action: "click->repost#toggle" } %>
       <span style='margin-left: 5px;'>repost</span> </span>
 
-    <span class="like" data-controller="like">
-      <%= image_tag "heart.png", width:"20", data: { controller:"toggle", action: "click->like#toggle" } %> 
-      <span style='margin-left: 5px;'>like</span> </span>
+    #<span class="like" data-controller="like">
+      #<%= image_tag "heart.png", width:"20", data: { controller:"toggle", action: "click->like#toggle" } %> 
+      #<span style='margin-left: 5px;'>like</span> </span>
+  <div id="like-btn<%= micropost.id %>">
+    <%= render partial: "likes/like", locals: { micropost: micropost } %>
+  </div>
       
     <span class="favorite" data-controller="favorite">
       <%= image_tag "star.png", width:"20", data: { controller:"toggle", action: "click->favorite#toggle" } %>

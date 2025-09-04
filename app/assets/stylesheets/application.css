@@ -37,3 +37,8 @@
   opacity:0.7;
   color: #ff8400;
 }
+
+.pinned {
+  background-color: #fff8dc;
+  border-left: 4px solid #f0c000;
+}
