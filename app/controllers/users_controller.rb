@@ -3,7 +3,7 @@ class UsersController < ApplicationController
                                         :following, :followers]
   before_action :correct_user,   only: [:edit, :update]
   before_action :admin_user,     only: :destroy
-
+  
   def index
     @users = User.paginate(page: params[:page])
   end
@@ -61,6 +61,12 @@ class UsersController < ApplicationController
     render 'show_follow', status: :unprocessable_entity
   end
 
+  def likes
+    @user  = User.find(params[:id])
+    likes = Like.where(user_id: @user.id).pluck(:micropost_id)
+    @like_microposts = Micropost.where(id: likes)
+  end
+
   private
 
     def user_params
@@ -83,4 +89,5 @@ class UsersController < ApplicationController
     def admin_user
       redirect_to(root_url, status: :see_other) unless current_user.admin?
     end
+
 end
