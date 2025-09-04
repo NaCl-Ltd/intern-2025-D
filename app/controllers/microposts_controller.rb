@@ -13,10 +13,6 @@ class MicropostsController < ApplicationController
       render 'static_pages/home', status: :unprocessable_entity
     end
   end
-  
-  def latest
-    @microposts = Micropost.latest(current_user)
-  end
 
   def latest
     @microposts = Micropost.latest(current_user)
@@ -39,7 +35,7 @@ class MicropostsController < ApplicationController
     current_user.microposts.where.not(id: micropost.id).where(pinned_by_id: current_user.id).update_all(pinned_by_id: nil)
     #新たに固定
     micropost.update(pinned_by_id: current_user.id)
-    redirect_to request.referrer || root_url, notice: "固定しました"
+    redirect_to request.referrer || root_url, notice: "Micropost fixed"
   end
 
   def unfix
@@ -48,7 +44,7 @@ class MicropostsController < ApplicationController
 
     micropost.update(pinned_by_id: nil)
 
-    redirect_to request.referrer || root_url, notice: "固定を解除しました"
+    redirect_to request.referrer || root_url, notice: "Micropost removed "
 end
 
   private
