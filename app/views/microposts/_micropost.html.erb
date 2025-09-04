@@ -1,4 +1,4 @@
-<li id="micropost-<%= micropost.id %>">
+<li class="micropost-<%= micropost.class %>">
   <%= link_to gravatar_for(micropost.user, size: 50), micropost.user %>
   <span class="user"><%= link_to micropost.user.name, micropost.user %></span>
   <span class="content">
@@ -22,16 +22,17 @@
     <% end %>
 
   </span>
-  <div class="interaction">
-    <span class="comment">
-      <%= image_tag "chat.png", width:"20" %>
-      <span style='margin-left: 5px;'>chat</span> </span>
 
+<div class="row">
+  <div class="interaction">
+  
     <span class="repost" data-controller="repost">
       <%= image_tag "retweet.png", width:"20", data: { controller:"toggle", action: "click->repost#toggle" } %>
-      <span style='margin-left: 5px;'>repost</span> </span>
+      <span style="margin-left: 5px;">repost</span>
+    </span>
 
-    <div id="like-btn<%= micropost.id %>">
+
+   <div id="like-btn<%= micropost.id %>">
       <%= render partial: "likes/like", locals: { micropost: micropost } %>
     </div>
       
@@ -39,6 +40,23 @@
       <%= render partial: "favorites/favorite", locals: { micropost: micropost } %>
     </div>
   </div>
-    
 
-</li>
+
+  <div class="comment">
+    <div class="interaction2">
+      <button class="show-comment-box">
+        <%= image_tag "chat.png", width:"20" %>
+      </button>
+      <span style="margin-left: 5px; margin-top: 2px;">comment</span>
+    </div>
+
+    <div class="comment-box" style="display: none;">
+      <textarea class="comment-input" placeholder="Please enter your comments"></textarea>
+      <button class="save-comment">save</button>
+    </div>
+
+    <div class="comment-list"></div>
+
+  </div>
+</div>
+
