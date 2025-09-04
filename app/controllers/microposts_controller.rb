@@ -1,6 +1,6 @@
 class MicropostsController < ApplicationController
   before_action :logged_in_user, only: [:create, :destroy, :latest]
-  before_action :correct_user,   only: :destroy
+  before_action :correct_user,   only: [:destroy, :fix, :unfix]
 
   def create
     @micropost = current_user.microposts.build(micropost_params)
@@ -12,10 +12,6 @@ class MicropostsController < ApplicationController
       @feed_items = current_user.feed.paginate(page: params[:page])
       render 'static_pages/home', status: :unprocessable_entity
     end
-  end
-  
-  def latest
-    @microposts = Micropost.latest(current_user)
   end
 
   def latest
@@ -35,11 +31,14 @@ class MicropostsController < ApplicationController
   def fix
     micropost = current_user.microposts.find_by(id: params[:id])
     return redirect_to root_url, alert: "Micropost not found" unless micropost
-    #他の固定を解除
-    current_user.microposts.where.not(id: micropost.id).where(pinned_by_id: current_user.id).update_all(pinned_by_id: nil)
-    #新たに固定
-    micropost.update(pinned_by_id: current_user.id)
-    redirect_to request.referrer || root_url, notice: "固定しました"
+    Micropost.transaction do
+      #他の固定を解除
+      #current_user.microposts.where.not(id: micropost.id).where(pinned_by_id: current_user.id).update_all(pinned_by_id: nil)
+      current_user.microposts.where(pinned_by_id: current_user.id).update_all(pinned_by_id: nil)
+      #新たに固定!マークでエラー時に例外を出力
+      micropost.update!(pinned_by_id: current_user.id)
+    end
+    redirect_to request.referrer || root_url, notice: "Micropost fixed"
   end
 
   def unfix
@@ -48,7 +47,7 @@ class MicropostsController < ApplicationController
 
     micropost.update(pinned_by_id: nil)
 
-    redirect_to request.referrer || root_url, notice: "固定を解除しました"
+    redirect_to request.referrer || root_url, notice: "Micropost removed "
 end
 
   private
