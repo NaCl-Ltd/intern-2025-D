@@ -31,12 +31,9 @@
       <%= image_tag "retweet.png", width:"20", data: { controller:"toggle", action: "click->repost#toggle" } %>
       <span style='margin-left: 5px;'>repost</span> </span>
 
-    #<span class="like" data-controller="like">
-      #<%= image_tag "heart.png", width:"20", data: { controller:"toggle", action: "click->like#toggle" } %> 
-      #<span style='margin-left: 5px;'>like</span> </span>
-  <div id="like-btn<%= micropost.id %>">
-    <%= render partial: "likes/like", locals: { micropost: micropost } %>
-  </div>
+    <div id="like-btn<%= micropost.id %>">
+      <%= render partial: "likes/like", locals: { micropost: micropost } %>
+    </div>
       
     <span class="favorite" data-controller="favorite">
       <%= image_tag "star.png", width:"20", data: { controller:"toggle", action: "click->favorite#toggle" } %>
