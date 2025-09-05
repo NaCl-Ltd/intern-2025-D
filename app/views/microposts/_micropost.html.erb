@@ -23,40 +23,40 @@
 
   </span>
 
-<div class="row">
-  <div class="interaction">
-  
-    <span class="repost" data-controller="repost">
-      <%= image_tag "retweet.png", width:"20", data: { controller:"toggle", action: "click->repost#toggle" } %>
-      <span style="margin-left: 5px;">repost</span>
-    </span>
+  <div class="row">
+    <div class="interaction">
+    
+      <span class="repost" data-controller="repost">
+        <%= image_tag "retweet.png", width:"20", data: { controller:"toggle", action: "click->repost#toggle" } %>
+        <span style="margin-left: 5px;">repost</span>
+      </span>
 
 
-   <div id="like-btn<%= micropost.id %>">
-      <%= render partial: "likes/like", locals: { micropost: micropost } %>
+      <div id="like-btn<%= micropost.id %>">
+        <%= render partial: "likes/like", locals: { micropost: micropost } %>
+      </div>
+        
+      <div id="favorite-btn<%= micropost.id %>">
+        <%= render partial: "favorites/favorite", locals: { micropost: micropost } %>
+      </div>
     </div>
-      
-    <div id="favorite-btn<%= micropost.id %>">
-      <%= render partial: "favorites/favorite", locals: { micropost: micropost } %>
+
+
+    <div class="comment">
+      <div class="interaction2">
+        <button class="show-comment-box">
+          <%= image_tag "chat.png", width:"20" %>
+        </button>
+        <span style="margin-left: 5px; margin-top: 2px;">comment</span>
+      </div>
+
+      <div class="comment-box" style="display: none;">
+        <textarea class="comment-input" placeholder="Please enter your comments"></textarea>
+        <button class="save-comment">save</button>
+      </div>
+
+      <div class="comment-list"></div>
+
     </div>
   </div>
-
-
-  <div class="comment">
-    <div class="interaction2">
-      <button class="show-comment-box">
-        <%= image_tag "chat.png", width:"20" %>
-      </button>
-      <span style="margin-left: 5px; margin-top: 2px;">comment</span>
-    </div>
-
-    <div class="comment-box" style="display: none;">
-      <textarea class="comment-input" placeholder="Please enter your comments"></textarea>
-      <button class="save-comment">save</button>
-    </div>
-
-    <div class="comment-list"></div>
-
-  </div>
-</div>
-
+</li>
