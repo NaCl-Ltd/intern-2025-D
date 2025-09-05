@@ -18,8 +18,8 @@ Rails.application.routes.draw do
   resources :account_activations, only: [:edit]
   resources :password_resets,     only: [:new, :create, :edit, :update]
   resources :microposts,          only: [:create, :destroy] do
-     resource :likes, only: [:create, :destroy]
-     resource :favorites, only: [:create, :destroy]
+    resource :likes, only: [:create, :destroy]
+    resource :favorites, only: [:create, :destroy]
     collection do
       get :latest
     end
@@ -29,8 +29,6 @@ Rails.application.routes.draw do
     end
   end
 
-
-  
   resources :relationships,       only: [:create, :destroy]
   get '/microposts', to: 'static_pages#home'
 end

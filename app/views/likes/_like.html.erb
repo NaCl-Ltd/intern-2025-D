@@ -1,6 +1,6 @@
 <% if logged_in? && micropost.liked_by?(current_user)%>
-  <%=link_to image_tag("heart_fill.png",size: '20x20'), micropost_likes_path(micropost.id),  data: { turbo_method: :delete }, class: "micropost_likes" %>
+  <%=link_to image_tag("heart_fill.png",size: '20x20'), micropost_likes_path(micropost.id),  data: { turbo_method: :delete }, class: "micropost_likes" %> like
 <% else %>
-  <%=link_to image_tag("heart_blank.png",size: '20x20'), micropost_likes_path(micropost.id), data: { turbo_method: :post }, class: "micropost_likes" %>
+  <%=link_to image_tag("heart_blank.png",size: '20x20'), micropost_likes_path(micropost.id), data: { turbo_method: :post }, class: "micropost_likes" %> like
 <% end %>
 
